@@ -13,6 +13,28 @@ This project provides a fallback mechanism for embedding Vimeo videos on web pag
 - **OneTrust Integration**: Integrates with OneTrust's consent management platform
 - **Responsive Iframe**: Uses responsive padding for proper video aspect ratio on all devices
 
+## Installation
+
+### Basic Setup
+
+1. **Include the script files** in your HTML page:
+   ```html
+   <script src="ConsentManager.js"></script>
+   ```
+2. **Add the HTML structure** from `test.html` to your webpage where you want the video to appear
+3. **Ensure OneTrust is loaded** before the ConsentManager script:
+
+   ```html
+   <!-- OneTrust Banner Script -->
+   <script
+     src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+     charset="UTF-8"
+   ></script>
+
+   <!-- Your ConsentManager -->
+   <script src="ConsentManager.js"></script>
+   ```
+
 ## Usage
 
 Include the `test.html` file's content in your webpage where you want to embed a Vimeo video with consent management.
