@@ -34,6 +34,6 @@ class ConsentManager {
     }
 }
 var consentManager = new ConsentManager();
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
     consentManager.hideElements();
 });
