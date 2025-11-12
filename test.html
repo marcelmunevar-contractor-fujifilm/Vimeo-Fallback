@@ -28,14 +28,14 @@
             var warningElem = document.getElementsByClassName("video-consent-warning");
             if (this.isC0004Active()) {
                 for (let i = 0; i < warningElem.length; i++) {
-                    warningElem.style.display = "none";
+                    warningElem[i].style.display = "none";
                 }
                 for (let i = 0; i < videoElem.length; i++) {
                     videoElem[i].style.display = "block";
                 }
             } else {
                 for (let i = 0; i < warningElem.length; i++) {
-                    warningElem.style.display = "block";
+                    warningElem[i].style.display = "block";
                 }
                 for (let i = 0; i < videoElem.length; i++) {
                     videoElem[i].style.display = "none";
