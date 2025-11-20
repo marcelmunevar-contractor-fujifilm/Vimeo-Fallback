@@ -68,3 +68,13 @@ The `ConsentManager` class handles:
 - The video is hidden by default and only shown when C0004 consent is active
 - The consent warning is displayed by default and hidden when C0004 is active
 - DOM content loaded event triggers the initial consent check
+
+## CAMP Instructions
+
+1. Add the script shown below to "COMMON ATTRIBUTES"->"Custom tag body bottom" in CAMP.
+
+<script src="https://assets.fujifilmusa.com/hlus/vimeo-fallback/ConsentManager.js"></script>
+
+2. Add the code shown below to a z10_embeddedCode paragraph.
+
+<div class="vimeo-placeholder"> <div class="video-consent-warning" style="display:none"> <div class="c-attention-box box -blue -info"> <h3 class="c-headline">Video Cannot Be Displayed</h3> <div class="m-wysiwyg"> <p>To view this video, please enable Targeting Cookies in your cookie settings.</p> <a href ="#" onclick="consentManager.enableTargeting(event);">Click Here to Enable Targeting Cookies</a> </div> </div> </div> <div class="vimeo-video"> {Paste Vimeo Embed Here} </div> </div>
