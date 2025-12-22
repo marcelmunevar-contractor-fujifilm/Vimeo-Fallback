@@ -77,4 +77,4 @@ The `ConsentManager` class handles:
 
 2. Add the code shown below to a z10_embeddedCode paragraph.
 
-<div class="vimeo-placeholder"> <div class="video-consent-warning" style="display:none"> <div class="c-attention-box box -blue -info"> <h3 class="c-headline">Video Cannot Be Displayed</h3> <div class="m-wysiwyg"> <p>To view this video, please enable Targeting Cookies in your cookie settings.</p> <a href ="#" onclick="consentManager.enableTargeting(event);">Click Here to Enable Targeting Cookies</a> </div> </div> </div> <div class="vimeo-video"> {Paste Vimeo Embed Here} </div> </div>
+<div class="vimeo-placeholder"> <div class="video-consent-warning" style="display:none"> <div class="c-attention-box box -blue -info"> <h3 class="c-headline">Video Cannot Be Displayed</h3> <div class="m-wysiwyg"> <p>To view this video, please enable Targeting Cookies in your cookie settings.</p> <p><a href ="#" onclick="consentManager.enableTargeting(event);">Click Here to Enable Targeting Cookies</a></p> <p> Already enabled? Try refreshing your browser </p> </div> </div> </div> <div class="vimeo-video"> {Paste Vimeo Embed Here} </div> </div>

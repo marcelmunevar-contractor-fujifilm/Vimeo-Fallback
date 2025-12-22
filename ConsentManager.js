@@ -1,11 +1,14 @@
 class ConsentManager {
     enableTargeting() {
         event.preventDefault();
-        OneTrust.UpdateConsent("Category", "C0004:1").then(() => {
-            this.hideElements();
-        }).catch(error => {
-            console.error('Error updating consent:', error);
-        });
+        OneTrust.ToggleInfoDisplay();
+        /*setTimeout(() => {
+            OneTrust.UpdateConsent("Category", "C0004:1").then(() => {
+                this.hideElements();
+            }).catch(error => {
+                console.error('Error updating consent:', error);
+            });
+        }, 2000);*/
     }
     isC0004Active() {
         if (typeof OnetrustActiveGroups !== 'undefined') {
