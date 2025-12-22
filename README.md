@@ -49,7 +49,7 @@ Include the `test.html` file's content in your webpage where you want to embed a
 
 The `ConsentManager` class handles:
 
-- **enableTargeting()**: Updates the OneTrust consent to enable targeting cookies
+- **enableTargeting()**: Opens the OneTrust cookie settings (via `ToggleInfoDisplay()`), waits 2 seconds, and calls `OneTrust.UpdateConsent("Category", "C0004:1")`. This method supports both synchronous and promise-based `UpdateConsent` implementations and will refresh the UI when C0004 (Targeting) becomes active. Ensure the triggering link passes the event (e.g., `onclick="consentManager.enableTargeting(event)"`) — consider updating the link text to **"Open cookie settings"** for clarity.
 - **isC0004Active()**: Checks if the C0004 consent category is currently active
 - **hideElements()**: Shows/hides the warning and video based on consent status
 
