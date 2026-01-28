@@ -11,47 +11,55 @@ This project provides a fallback mechanism for embedding Vimeo videos on web pag
 - **Consent-Based Video Display**: Videos only display when the C0004 (Targeting) consent category is enabled
 - **User-Friendly Warning**: Displays a consent warning when targeting cookies are disabled
 - **OneTrust Integration**: Integrates with OneTrust's consent management platform
-- **Responsive Iframe**: Uses responsive padding for proper video aspect ratio on all devices
 
 ## Installation
 
-### Basic Setup
-
 1. **Include the script files** in your HTML page:
-   ```html
-   <script src="ConsentManager.js"></script>
-   ```
-2. **Add the HTML structure** from `test.html` to your webpage where you want the video to appear
-3. **Ensure OneTrust is loaded** before the ConsentManager script:
+   Add the script shown below to "COMMON ATTRIBUTES"->"Custom tag body bottom" in CAMP.
 
-   ```html
-   <!-- OneTrust Banner Script -->
-   <script
-     src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
-     charset="UTF-8"
-   ></script>
+```html
+<script src="https://assets.fujifilmusa.com/hlus/vimeo-fallback/ConsentManager.js"></script>
+```
 
-   <!-- Your ConsentManager -->
-   <script src="ConsentManager.js"></script>
-   ```
+2. **Add the HTML structure** to your webpage where you want the video to appear
 
-## Usage
+```html
+<div class="vimeo-placeholder">
+  <div class="video-consent-warning" style="display:none">
+    <div class="c-attention-box box -blue -info">
+      <h3 class="c-headline">Video Cannot Be Displayed</h3>
+      <div class="m-wysiwyg">
+        <p>
+          To view this video, please enable Targeting Cookies in your cookie
+          settings.
+        </p>
+        <p>
+          <a href="#" onclick="consentManager.enableTargeting(event);"
+            >Click Here to Enable Targeting Cookies</a
+          >
+        </p>
+        <p>Already enabled? Try refreshing your browser.</p>
+      </div>
+    </div>
+  </div>
+  <div class="vimeo-video">{Paste Vimeo Embed Here}</div>
+</div>
+```
 
-Include the `test.html` file's content in your webpage where you want to embed a Vimeo video with consent management.
+#### Class details:
 
-### HTML Structure
+- `vimeo-placeholder`: Top-level wrapper for the component.
+- `video-consent-warning`: The warning block shown when targeting cookies (C0004) are not active. It's hidden by default via `style="display:none"` and shown by the `ConsentManager` when needed.
+- `c-attention-box box -blue -info c-headline m-wysiwyg`: Site-level utility classes used by CAMP to render the warning box.
+- `vimeo-video`: Container for the Vimeo iframe. Paste the Vimeo embed markup here and hide/show this element based on consent status.
 
-- **Video Container**: A placeholder div that contains both the warning and video elements
-- **Consent Warning**: Displays a message and link to enable targeting cookies
-- **Vimeo Iframe**: The embedded Vimeo player (hidden until consent is granted)
+## JavaScript Functionality
 
-### JavaScript Functionality
+The `ConsentManager` initializes on page load (on `DOMContentLoaded`) and handles:
 
-The `ConsentManager` class handles:
-
-- **enableTargeting()**: Opens the OneTrust cookie settings (via `ToggleInfoDisplay()`), waits 2 seconds, and calls `OneTrust.UpdateConsent("Category", "C0004:1")`. This method supports both synchronous and promise-based `UpdateConsent` implementations and will refresh the UI when C0004 (Targeting) becomes active. Ensure the triggering link passes the event (e.g., `onclick="consentManager.enableTargeting(event)"`) — consider updating the link text to **"Open cookie settings"** for clarity.
-- **isC0004Active()**: Checks if the C0004 consent category is currently active
-- **hideElements()**: Shows/hides the warning and video based on consent status
+- **enableTargeting()**: Calls `OneTrust.ToggleInfoDisplay()` to open the OneTrust cookie settings. Users must enable Targeting cookies in that UI; consent isn't changed programmatically to avoid cookie walling.
+- **isC0004Active()**: Checks if the C0004 consent category is currently active by inspecting `OnetrustActiveGroups`.
+- **hideElements()**: Shows/hides the warning and video based on consent status.
 
 ## OneTrust Categories
 
@@ -61,20 +69,4 @@ The `ConsentManager` class handles:
 
 - OneTrust consent manager script must be loaded on the page
 - `OnetrustActiveGroups` global variable must be available
-- `OneTrust.UpdateConsent()` method must be available
-
-## Notes
-
-- The video is hidden by default and only shown when C0004 consent is active
-- The consent warning is displayed by default and hidden when C0004 is active
-- DOM content loaded event triggers the initial consent check
-
-## CAMP Instructions
-
-1. Add the script shown below to "COMMON ATTRIBUTES"->"Custom tag body bottom" in CAMP.
-
-<script src="https://assets.fujifilmusa.com/hlus/vimeo-fallback/ConsentManager.js"></script>
-
-2. Add the code shown below to a z10_embeddedCode paragraph.
-
-<div class="vimeo-placeholder"> <div class="video-consent-warning" style="display:none"> <div class="c-attention-box box -blue -info"> <h3 class="c-headline">Video Cannot Be Displayed</h3> <div class="m-wysiwyg"> <p>To view this video, please enable Targeting Cookies in your cookie settings.</p> <p><a href ="#" onclick="consentManager.enableTargeting(event);">Click Here to Enable Targeting Cookies</a></p> <p> Already enabled? Try refreshing your browser </p> </div> </div> </div> <div class="vimeo-video"> {Paste Vimeo Embed Here} </div> </div>
+- `OneTrust.ToggleInfoDisplay()` method must be available (used to open the OneTrust cookie settings UI from the page)
