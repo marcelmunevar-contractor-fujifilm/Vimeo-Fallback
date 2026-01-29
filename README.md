@@ -51,15 +51,16 @@ This project provides a fallback mechanism for embedding Vimeo videos on web pag
 - `vimeo-placeholder`: Top-level wrapper for the component.
 - `video-consent-warning`: The warning block shown when targeting cookies (C0004) are not active. It's hidden by default via `style="display:none"` and shown by the `ConsentManager` when needed.
 - `c-attention-box box -blue -info c-headline m-wysiwyg`: Site-level utility classes used by CAMP to render the warning box.
-- `vimeo-video`: Container for the Vimeo iframe. Paste the Vimeo embed markup here and hide/show this element based on consent status.
+- `vimeo-video`: Container for the Vimeo iframe. Paste the Vimeo embed markup here and is hidden/shown based on consent status.
 
 ## JavaScript Functionality
 
-The `ConsentManager` initializes on page load (on `DOMContentLoaded`) and handles:
+The `ConsentManager` initializes on page load (on `DOMContentLoaded`) as `consentManager`.
 
-- **enableTargeting()**: Calls `OneTrust.ToggleInfoDisplay()` to open the OneTrust cookie settings. Users must enable Targeting cookies in that UI; consent isn't changed programmatically to avoid cookie walling.
+Functions:
+- **enableTargeting()**: Calls `OneTrust.ToggleInfoDisplay()` to open the OneTrust cookie settings.
 - **isC0004Active()**: Checks if the C0004 consent category is currently active by inspecting `OnetrustActiveGroups`.
-- **hideElements()**: Shows/hides the warning and video based on consent status.
+- **hideElements()**: Shows/hides the warning and video based on consent status. Is called on page load (on `DOMContentLoaded`).
 
 ## OneTrust Categories
 
@@ -69,4 +70,4 @@ The `ConsentManager` initializes on page load (on `DOMContentLoaded`) and handle
 
 - OneTrust consent manager script must be loaded on the page
 - `OnetrustActiveGroups` global variable must be available
-- `OneTrust.ToggleInfoDisplay()` method must be available (used to open the OneTrust cookie settings UI from the page)
+- `OneTrust.ToggleInfoDisplay()` method must be available
