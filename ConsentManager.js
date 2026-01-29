@@ -1,5 +1,6 @@
 class ConsentManager {
-    enableTargeting() {
+    enableTargeting(event) {
+        event.preventDefault();
         OneTrust.ToggleInfoDisplay();
     }
     isC0004Active() {
