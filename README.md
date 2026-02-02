@@ -18,7 +18,7 @@ This project provides a fallback mechanism for embedding Vimeo videos on web pag
    Add the script shown below to "COMMON ATTRIBUTES"->"Custom tag body bottom" in CAMP.
 
 ```html
-<script src="https://assets.fujifilmusa.com/hlus/vimeo-fallback/ConsentManager.js"></script>
+<script src="/path/ConsentManager.js"></script>
 ```
 
 2. **Add the HTML structure** to your webpage where you want the video to appear
